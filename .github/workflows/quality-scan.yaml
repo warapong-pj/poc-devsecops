@@ -1,0 +1,31 @@
+name: quality scan
+
+on:
+  push: {}
+
+jobs:
+  sast:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.10'
+
+      - run: |
+          #!/bin/sh
+
+          set -e
+
+          mkdir -p $HOME/codeql-home
+          git clone --recursive https://github.com/github/codeql.git $HOME/codeql-home/codeql-repo
+          curl -fsSL https://github.com/github/codeql-cli-binaries/releases/download/v2.22.4/codeql-linux64.zip -o codeql-linux64.zip
+          unzip -q codeql-linux64.zip -d $HOME/codeql-home
+          rm codeql-linux64.zip
+          export PATH=$PATH:$HOME/codeql-home/codeql
+          pip install sarif-tools
+          codeql database create --language=python codeql-db --source-root=app
+          codeql database analyze codeql-db python-code-quality --format=sarif-latest --output=codeql.sarif
+          sarif csv codeql.sarif
+          cat codeql.csv
