@@ -84,4 +84,4 @@ jobs:
           wget https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/html.tpl
           sudo mv html.tpl /usr/local/bin/
 
-          trivy fs --format template --template "@/usr/bin/html.tpl" -o report-sca.html .
+          trivy fs --format template --template "@/usr/local/bin/html.tpl" -o report-sca.html .
