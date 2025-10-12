@@ -76,15 +76,10 @@ jobs:
 
           set -xe
 
-          git clone https://github.com/CycloneDX/Sunshine.git
-          cd Sunshine
-          pip install -r requirements.txt
-
           sudo apt-get install -y wget apt-transport-https gnupg lsb-release
           wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
           echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main | sudo tee -a /etc/apt/sources.list.d/trivy.list
           sudo apt-get update
           sudo apt-get install -y trivy
 
-          trivy fs --format sarif --output result-sca.sarif .
-          cat result-sca.sarif
+          trivy fs .
