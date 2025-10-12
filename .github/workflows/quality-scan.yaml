@@ -86,7 +86,5 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y trivy
 
-          trivy fs --format cyclonedx --output cyclonedx-result-sca.json .
-
-          python sunshine.py -i cyclonedx-result-sca.json -o cyclonedx-result-sca.html
-          cat cyclonedx-result-sca.html
+          trivy fs --format sarif --output result-sca.sarif .
+          cat result-sca.sarif
