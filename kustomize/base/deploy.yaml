@@ -14,8 +14,15 @@ spec:
       labels:
         app: poc-devsecops
     spec:
+      securityContext:
+        runAsUser: 1000
+        runAsNonRoot: true
       containers:
       - name: poc-devsecops
         image: ghcr.io/your-user/poc-devsecops
         ports:
         - containerPort: 8000
+        securityContext:
+          privileged: false
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: truetrue
