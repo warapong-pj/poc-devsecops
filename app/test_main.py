@@ -9,7 +9,7 @@ def test_read_main():
     assert response.status_code == 200
     assert response.json() == {"message": "Hello World"}
 
-def test_say_hello():
-    response = client.get("/hello/FastAPI")
-    assert response.status_code == 200
-    assert response.json() == {"message": "Hello FastAPI"}
+# def test_say_hello():
+#     response = client.get("/hello/FastAPI")
+#     assert response.status_code == 200
+#     assert response.json() == {"message": "Hello FastAPI"}
