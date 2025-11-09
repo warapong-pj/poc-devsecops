@@ -37,7 +37,7 @@ jobs:
           pip install uv
           uv add checkov
           source ./.venv/bin/activate
-          checkov -d kustomize/overlays/dev --framework kustomize --check CKV_K8S_6,CKV_K8S_21,CKV_K8S_22
+          checkov -d kustomize/overlays/dev --framework kustomize --check CKV_K8S_6,CKV_K8S_14,CKV_K8S_21,CKV_K8S_22
 
           kubectl kustomize kustomize/overlays/dev/ > kustomization.yaml
           cat kustomization.yaml
