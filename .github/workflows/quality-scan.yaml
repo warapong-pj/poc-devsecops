@@ -43,3 +43,25 @@ jobs:
           export PATH=$SONAR_SCANNER_HOME/bin:$PATH
 
           sonar-scanner -Dsonar.organization=warapong-pj -Dsonar.projectKey=warapong-pj_poc-devsecops -Dsonar.token=${{ secrets.SONAR_TOKEN }} -Dsonar.python.coverage.reportPaths=coverage.xml
+
+  sca:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - run: |
+          #!/bin/sh
+
+          set -xe
+
+          sudo apt-get install -y wget apt-transport-https gnupg lsb-release
+          wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
+          echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main | sudo tee -a /etc/apt/sources.list.d/trivy.list
+          sudo apt-get update
+          sudo apt-get install -y trivy
+          wget https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/html.tpl
+          sudo mv html.tpl /usr/local/bin/
+
+          trivy fs --format template --template "@/usr/local/bin/html.tpl" -o report-sca.html .
+          cat report-sca.html
