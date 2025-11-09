@@ -26,5 +26,5 @@ jobs:
           mv yq_linux_amd64 /usr/local/bin/yq
           rm -f yq_linux_amd64.tar.gz
 
-          yq e -i '.images[0].newTag = "$CURRENT_TAG"' kustomize/overlays/dev/kustomization.yaml
+          yq e -i ".images[0].newTag = \"$CURRENT_TAG\"" kustomize/overlays/dev/kustomization.yaml
           cat kustomize/overlays/dev/kustomization.yaml
