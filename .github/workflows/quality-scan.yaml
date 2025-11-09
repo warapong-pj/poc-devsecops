@@ -26,6 +26,7 @@ jobs:
           coverage run -m pytest app
           coverage xml
 
+      - uses: actions/setup-java@v5
         with:
           distribution: 'adopt'
           java-version: '21'
