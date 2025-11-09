@@ -18,8 +18,7 @@ jobs:
           set -xe
 
           echo "deployment"
-          #CURRENT_TAG=$(git tag --points-at HEAD)
-          CURRENT_TAG=v0.0.1
+          CURRENT_TAG=$(git tag --points-at HEAD)
 
           curl -L -O https://github.com/mikefarah/yq/releases/download/v4.48.1/yq_linux_amd64.tar.gz
           tar -xzf yq_linux_amd64.tar.gz --strip-components=1
@@ -27,4 +26,9 @@ jobs:
           rm -f yq_linux_amd64.tar.gz
 
           yq e -i ".images[0].newTag = \"$CURRENT_TAG\"" kustomize/overlays/dev/kustomization.yaml
-          cat kustomize/overlays/dev/kustomization.yaml
+
+          curl -LO https://dl.k8s.io/release/v1.34.0/bin/linux/amd64/kubectl
+          chmod +x kubectl
+          mv kubectl /usr/local/bin/kubectl
+
+          kubectl kustomize kustomize/overlays/dev/
