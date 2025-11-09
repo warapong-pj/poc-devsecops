@@ -2,8 +2,8 @@ name: deployment pipeline
 
 on:
   push:
-    tags:
-      - '*'
+    # tags:
+    #   - '*'
 
 jobs:
   update_manifest:
@@ -21,7 +21,5 @@ jobs:
           CURRENT_TAG=$(git tag --points-at HEAD)
 
           curl -L -O https://github.com/mikefarah/yq/releases/download/v4.48.1/yq_linux_amd64.tar.gz
-          tar -xzf yq_linux_amd64.tar.gz
-          mv yq /usr/local/bin/
-
-          la -la
+          tar -xzf yq_linux_amd64.tar.gz --strip-components=1
+          mv yq_linux_amd64 /usr/local/bin/

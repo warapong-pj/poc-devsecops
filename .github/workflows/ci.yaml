@@ -2,8 +2,10 @@ name: ci pipeline
 
 on:
   push:
-    branches:
-      - "*"
+    tags:
+      - '*'
+    # branches:
+    #   - "*"
 
 jobs:
   build:
