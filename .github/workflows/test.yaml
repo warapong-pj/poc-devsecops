@@ -14,11 +14,12 @@ jobs:
       - run: |
           #!/bin/sh
 
-          set -e
+          set -xe
 
           pip install uv
 
           uv venv
+          source .venv/bin/activate
           uv sync
 
           coverage run -m pytest app
