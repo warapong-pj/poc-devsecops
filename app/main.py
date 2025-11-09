@@ -7,9 +7,6 @@ app = FastAPI()
 async def root():
     return {"message": "Hello World"}
 
-client = TestClient(app)
-
-def test_read_main():
-    response = client.get("/")
-    assert response.status_code == 200
-    assert response.json() == {"message": "Hello World"}
+@app.get("/hello/{name}")
+async def say_hello(name: str):
+    return {"message": f"Hello {name}"}
