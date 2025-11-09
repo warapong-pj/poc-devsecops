@@ -11,6 +11,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
 
       - run: |
           #!/bin/sh
@@ -18,7 +21,8 @@ jobs:
           set -xe
 
           echo "deployment"
-          CURRENT_TAG=$(git tag --points-at HEAD)
+          #CURRENT_TAG=$(git tag --points-at HEAD)
+          CURRENT_TAG=v0.0.1
 
           curl -L -O https://github.com/mikefarah/yq/releases/download/v4.48.1/yq_linux_amd64.tar.gz
           tar -xzf yq_linux_amd64.tar.gz --strip-components=1
@@ -31,4 +35,9 @@ jobs:
           chmod +x kubectl
           mv kubectl /usr/local/bin/kubectl
 
-          kubectl kustomize kustomize/overlays/dev/
+          pip install uv
+          uv add checkov
+          checkov -d kustomize/overlays/dev --framework kustomize
+
+          kubectl kustomize kustomize/overlays/dev/ > kustomization.yaml
+          #kubectl apply kustomization.yaml
