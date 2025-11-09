@@ -18,7 +18,6 @@ jobs:
           set -xe
 
           echo "retag"
-          docker pull ghcr.io/warapong-pj/poc-devsecops:323575b
 
   update_manifest:
     runs-on: ubuntu-latest
