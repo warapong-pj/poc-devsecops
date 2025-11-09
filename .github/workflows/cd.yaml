@@ -2,8 +2,8 @@ name: deployment pipeline
 
 on:
   push:
-    # tags:
-    #   - '*'
+    tags:
+      - '*'
 
 jobs:
   update_manifest:
