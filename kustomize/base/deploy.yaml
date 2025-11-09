@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: poc-devsecops
+  labels:
+    app: poc-devsecops
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: poc-devsecops
+  template:
+    metadata:
+      labels:
+        app: poc-devsecops
+    spec:
+      containers:
+      - name: poc-devsecops
+        image: ghcr.io/your-user/poc-devsecops
+        ports:
+        - containerPort: 8000
