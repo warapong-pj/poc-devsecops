@@ -16,6 +16,8 @@ jobs:
 
           set -e
 
+          pip install uv
+
           uv venv
           uv sync
 
