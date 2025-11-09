@@ -18,3 +18,4 @@ jobs:
           set -xe
 
           echo "deployment"
+          git tag --points-at HEAD
