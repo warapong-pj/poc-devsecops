@@ -16,7 +16,8 @@ jobs:
           framework: dockerfile
           dockerfile_path: Dockerfile
           check: CKV_DOCKER_1,CKV_DOCKER_7,CKV_DOCKER_8
-      - run: echo "TAG=$(git tag --points-at HEAD)" >> "$GITHUB_OUTPUT"
+      - id: get-tag
+        run: echo "TAG=$(git tag --points-at HEAD)" >> "$GITHUB_OUTPUT"
 
       - uses: docker/login-action@v3
         with:
@@ -27,4 +28,4 @@ jobs:
       - uses: docker/build-push-action@v6
         with:
           push: true
-          tags: ghcr.io/${{ github.actor }}/poc-devsecops:${{ steps.color-selector.outputs.TAG }}
+          tags: ghcr.io/${{ github.actor }}/poc-devsecops:${{ steps.get-tag.outputs.TAG }}
