@@ -42,4 +42,4 @@ jobs:
           unzip -o $HOME/.sonar/sonar-scanner.zip -d $HOME/.sonar/
           export PATH=$SONAR_SCANNER_HOME/bin:$PATH
 
-          sonar-scanner -Dsonar.organization=warapong-pj -Dsonar.projectKey=warapong-pj_poc-devsecops -Dsonar.token=${{ secrets.SONAR_TOKEN }}
+          sonar-scanner -Dsonar.organization=warapong-pj -Dsonar.projectKey=warapong-pj_poc-devsecops -Dsonar.token=${{ secrets.SONAR_TOKEN }} -Dsonar.python.coverage.reportPaths=coverage.xml
