@@ -1,0 +1,20 @@
+name: deployment pipeline
+
+on:
+  push:
+    tags:
+    - '*'
+
+jobs:
+  update_manifest:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - run: |
+          #!/bin/sh
+
+          set -xe
+
+          echo "deployment"
