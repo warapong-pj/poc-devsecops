@@ -37,6 +37,7 @@ jobs:
 
           pip install uv
           uv add checkov
+          source ./.venv/bin/activate
           checkov -d kustomize/overlays/dev --framework kustomize
 
           kubectl kustomize kustomize/overlays/dev/ > kustomization.yaml
