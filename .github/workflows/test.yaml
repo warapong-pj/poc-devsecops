@@ -20,7 +20,7 @@ jobs:
 
           uv venv
           source .venv/bin/activate
-          uv sync
+          uv sync --only-dev
 
           coverage run -m pytest app
           coverage report
