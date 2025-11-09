@@ -6,6 +6,20 @@ on:
     - '*'
 
 jobs:
+  retag:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - run: |
+          #!/bin/sh
+
+          set -xe
+
+          echo "retag"
+          docker pull ghcr.io/warapong-pj/poc-devsecops:323575b
+
   update_manifest:
     runs-on: ubuntu-latest
 
